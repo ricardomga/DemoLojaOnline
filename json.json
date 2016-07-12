@@ -1,0 +1,37 @@
+﻿{
+  "accounts": {
+    "data": [
+      {
+        "access_token": "EAACEdEose0cBAAWgoSOgOUAXiNKELdcVPeHM0VwLro4Lry1XDuXSy0fNPf71yGtuWObFlKZAE9Q3PadBo1DS6ycvTBMTphoTziXLLj6Vc8YD0iqcGs4xWPaStugwptXwxikhxBxsa0uEw4eNeeQFqkYxR1TAR05m6dZCWcGhunbvhlRdjI",
+        "category": "Book Store",
+        "category_list": [
+          {
+            "id": "197048876974331",
+            "name": "Book Store"
+          },
+          {
+            "id": "133510666716809",
+            "name": "Comic Book Store"
+          }
+        ],
+        "name": "Demo Loja Online",
+        "id": "301176983549878",
+        "perms": [
+          "ADMINISTER",
+          "EDIT_PROFILE",
+          "CREATE_CONTENT",
+          "MODERATE_CONTENT",
+          "CREATE_ADS",
+          "BASIC_ADMIN"
+        ]
+      }
+    ],
+    "paging": {
+      "cursors": {
+        "before": "MzAxMTc2OTgzNTQ5ODc4",
+        "after": "MzAxMTc2OTgzNTQ5ODc4"
+      }
+    }
+  },
+  "id": "112064809229314"
+}

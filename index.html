@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Demo Loja Online</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+
+        <!--
+        Below we include the Login Button social plugin. This button uses
+        the JavaScript SDK to present a graphical Login button that triggers
+        the FB.login() function when clicked.
+        -->
+        <h3>Login Facebook</h3>
+        <fb:login-button scope="public_profile,email,manage_pages" onlogin="checkLoginState();">
+        </fb:login-button>
+
+        <div id="status">
+        </div>
+        <br />
+        <br />
+
+        <h3>Criar tab no Facebook</h3>
+
+        <select id="page" onclick="setAccessToken()"></select>
+        <br />
+        <br />
+        <input id="tabName" type="text" placeholder="Nome do Tab" value="" />
+        <br />
+        <br />
+        <button onclick="createTab()" type="button">Criar Tab</button>
+        <button onclick="deleteTabs()" type="button">Eliminar Tabs</button>
+        <script src="app.js"></script>
+    </body>
+</html>
