@@ -17,11 +17,12 @@ function statusChangeCallback(response) {
         lstUserPages();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
-        document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+        document.getElementById('status').innerHTML = 'Necessita de aceitar os termos da aplicação!';
     } else {
         // The person is not logged into Facebook, so we're not sure if
         // they are logged into this app or not.
-        document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+
+        document.getElementById('status').innerHTML = 'Necessita de entrar no facebook!';
     }
 }
 
@@ -34,27 +35,34 @@ function checkLoginState() {
     }, true);
 }
 
+function deleteLoginMessage() {
+    document.getElementById('status').innerHTML = "";
+    checkLoginState();
+}
+
 function lstUserPages() {
     FB.api(
         "me/?fields=accounts",
         function (response) {
             if (response && !response.error) {
+                console.log(response);
                 //Verificar se o utilizador tem contas
                 if (response.accounts.data.length != 0) {
                     lstPages = response.accounts.data;
-                    var opt = document.createElement("option");
+                    var select = document.getElementById("page");
+                    console.log(lstPages.length);
                     for (i = 0; i < lstPages.length; i++) {
+                        var opt = document.createElement("option");
                         opt.value = lstPages[i].id;
                         opt.innerHTML = lstPages[i].name;
-                        var select = document.getElementById("page");
                         select.appendChild(opt);
-                        setAccessToken();
                     }
+                    setAccessToken();
                 } else {
-                    alert("Necessita de criar uma página!");
+                    messageAlert("Necessita de criar uma página!", "info");
                 }
             } else {
-                    alert("Erro ao acessar ás páginas que gere!");
+                messageAlert("Erro ao acessar ás páginas que gere!", "danger");
             }
         });
 }
@@ -72,34 +80,37 @@ function setAccessToken() {
 
 function createTab() {
     var tabName = document.getElementById("tabName").value;
-    FB.ui({
-        method: 'pagetab',
-        redirect_uri: 'https://socialbs.azurewebsites.net/store/'
-    }, function (response) {
-        alert("tab criada com sucesso");
-    });
-    //FB.api(
-    //    "/" + pageId + "/tabs", "post",
-    //    { access_token: pageAccessToken, app_id: appId, custom_name:tabName},
-    //    function (response) {
-    //        if (response && !response.error) {
-    //            alert("Tab criada com sucesso");
-    //        }
-    //        console.log(response);
-    //    });
+    //FB.ui({
+    //    method: 'pagetab',
+    //    redirect_uri: 'https://socialbs.azurewebsites.net/store/'
+    //}, function (response) {
+    //    alert("tab criada com sucesso");
+    //});
+    FB.api(
+        "/" + pageId + "/tabs", "post",
+        { access_token: pageAccessToken, app_id: appId, position:2, custom_name: tabName },
+        function (response) {
+            if (response && !response.error) {
+                messageAlert("Separador criado com sucesso", "success");
+            }
+            console.log(response);
+        });
 }
 
 function deleteTabs() {
     FB.api(
         "/" + pageId + "/tabs", "delete",
-        { access_token: pageAccessToken, tab: "app_"+appId},
+        { access_token: pageAccessToken, tab: "app_" + appId },
         function (response) {
             if (response && !response.error) {
-                alert("Tab eleminada com sucesso");
+                messageAlert("Separador eleminado com sucesso", "success");
+            } else {
+                messageAlert("Não foi possivel elminar o Separador", "danger");
             }
-            console.log(response);
+            
         });
 }
+
 
 window.fbAsyncInit = function () {
     FB.init({
@@ -137,9 +148,17 @@ window.fbAsyncInit = function () {
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
 
+function messageAlert(message, type) {
+    $('#messages').removeClass('hide').addClass('alert alert-'+ type +' alert-dismissible').slideDown().show();
+    $('#messages_content').html('<h4>' + message + '</h4>');
+    $('#messages').fadeOut(5000);
+   
+}
+
+
 function logginMessage() {
     FB.api('/me',
         function (response) {
-            document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+            document.getElementById('status').innerHTML = 'Está logado com a conta, ' + response.name + '!';
         });
 }

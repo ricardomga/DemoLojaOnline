@@ -1,35 +1,66 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <title>Demo Loja Online</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
+<head>
+    <title>Demo Loja Online</title>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
+</head>
+<body>
 
-        <!--
-        Below we include the Login Button social plugin. This button uses
-        the JavaScript SDK to present a graphical Login button that triggers
-        the FB.login() function when clicked.
-        -->
-        <h3>Login Facebook</h3>
-        <fb:login-button scope="public_profile,email,manage_pages" onlogin="checkLoginState();">
-        </fb:login-button>
+    <!--
+    Below we include the Login Button social plugin. This button uses
+    the JavaScript SDK to present a graphical Login button that triggers
+    the FB.login() function when clicked.
+    -->
 
-        <div id="status">
+    <div class="container body-content">
+        <div id="messages" class="hide col-sm-10" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div id="messages_content"></div>
         </div>
-        <br />
-        <br />
+        <div class="panel panel-default col-sm-10">
+            <div class="panel-heading">
+                <h3 class="panel-title">A sua loja no Facebook</h3>
+            </div>
+            <div class="panel-body">
+                <form id="form">
+                    <div class="col-sm-8 form-group">
+                        <fb:login-button scope="public_profile,email,manage_pages" onlogin="deleteLoginMessage()"></fb:login-button>
+                        <p id="status"></p>
+                    </div>
+                    <div class="col-sm-8 form-group">
+                        <label class="control-label">Página</label>
+                        <select class="form-control" id="page" onclick="setAccessToken()"></select>
+                    </div>
+                    <div class="col-sm-8 form-group">
+                        <label class="control-label">Nome do separador</label>
+                        <input class="form-control" id="tabName" type="text" placeholder="ex: Loja Online">
+                    </div>
+                    <div class="col-sm-8 form-group">
+                        <button type="button" class="btn btn-primary" onclick="createTab()">Publicar Separador</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteTabs()">Separador Ofline </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+     <script src="js/facebook.js"></script>
 
-        <h3>Criar tab no Facebook</h3>
 
-        <select id="page" onclick="setAccessToken()"></select>
-        <br />
-        <br />
-        <input id="tabName" type="text" placeholder="Nome do Tab" value="" />
-        <br />
-        <br />
-        <button onclick="createTab()" type="button">Criar Tab</button>
-        <button onclick="deleteTabs()" type="button">Eliminar Tabs</button>
-        <script src="app.js"></script>
-    </body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous">
+    </script>
+
+
+</body>
 </html>
