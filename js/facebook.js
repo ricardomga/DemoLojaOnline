@@ -32,12 +32,7 @@ function statusChangeCallback(response) {
 function checkLoginState() {
     FB.getLoginStatus(function (response) {
         statusChangeCallback(response);
-    }, true);
-}
-
-function deleteLoginMessage() {
-    document.getElementById('status').innerHTML = "";
-    checkLoginState();
+    });
 }
 
 function lstUserPages() {
@@ -149,7 +144,8 @@ window.fbAsyncInit = function () {
 // successful.  See statusChangeCallback() for when this call is made.
 
 function messageAlert(message, type) {
-    $('#messages').removeClass('hide').addClass('alert alert-'+ type +' alert-dismissible').slideDown().show();
+    $('#messages').removeClass('hide').addClass('alert alert-' + type
+        + ' alert-dismissible').slideDown().show();
     $('#messages_content').html('<h4>' + message + '</h4>');
     $('#messages').fadeOut(5000);
    
@@ -159,6 +155,7 @@ function messageAlert(message, type) {
 function logginMessage() {
     FB.api('/me',
         function (response) {
-            document.getElementById('status').innerHTML = 'Está logado com a conta, ' + response.name + '!';
+            document.getElementById('status').innerHTML = 'Está logado com a conta, '
+                + response.name + '!';
         });
 }
