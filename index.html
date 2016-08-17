@@ -10,46 +10,77 @@
           crossorigin="anonymous">
 </head>
 <body>
-
-    <!--
-    Below we include the Login Button social plugin. This button uses
-    the JavaScript SDK to present a graphical Login button that triggers
-    the FB.login() function when clicked.
-    -->
-
     <div class="container body-content">
-        <div id="messages" class="hide col-sm-10" role="alert">
+        <div id="messages" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <div id="messages_content"></div>
         </div>
-        <div class="panel panel-default col-sm-10">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">A sua loja no Facebook</h3>
             </div>
             <div class="panel-body">
                 <form id="form">
-                    <div class="col-sm-8 form-group">
-                        <fb:login-button scope="public_profile,email,manage_pages" onlogin="checkLoginState()"></fb:login-button>
-                        <p id="status"></p>
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <h4>Business Suite info</h4>
+                            <hr />
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Username</label>
+                            <select class="form-control" id="bsUsername" onclick="setAccessToken()">
+                                <option value="gomes@esposende2000.pt">gomes@esposende2000.pt</option>
+                                <option value="geral@2solutions.pt">geral@2solutions.pt</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Password</label>
+                            <input class="form-control" id="bsPass" type="password" placeholder="Password">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Tenent Id</label>
+                            <input class="form-control" id="tenentId" type="text" placeholder="Tenent Id">
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Organization Id</label>
+                            <input class="form-control" id="orgId" type="text" placeholder="Organization Id">
+                        </div>
                     </div>
-                    <div class="col-sm-8 form-group">
-                        <label class="control-label">Página</label>
-                        <select class="form-control" id="page" onclick="setAccessToken()"></select>
-                    </div>
-                    <div class="col-sm-8 form-group">
-                        <label class="control-label">Nome do separador</label>
-                        <input class="form-control" id="tabName" type="text" placeholder="ex: Loja Online">
-                    </div>
-                    <div class="col-sm-8 form-group">
-                        <button type="button" class="btn btn-primary" onclick="createTab()">Publicar Separador</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteTabs()">Separador Ofline </button>
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <h4>Facebook info</h4>
+                            <hr />
+                        </div>
+                        <div class="col-sm-10 form-group">
+                            <fb:login-button scope="public_profile,email,manage_pages" onlogin="checkLoginState()"></fb:login-button>
+                            <p id="status"></p>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Página</label>
+                            <select class="form-control" id="page" onclick="setAccessToken()"></select>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Nome do separador</label>
+                            <input class="form-control" id="tabName" type="text" placeholder="ex: Loja Online">
+                        </div>
+                        <div class="radio col-sm-10">
+                            <label><input type="radio" name="env" value="http://localhost:17915/api/login">servidor local</label>
+                        </div>
+                        <div class="radio col-sm-10">
+                            <label><input type="radio" name="env" value="http://socialbs.azurewebsites.net/api/bsusers">servidor remoto</label>
+                        </div>
+                        <div class="col-sm-10 form-group">
+                            <br />
+                            <button type="button" class="btn btn-primary" onclick="createTab()">Publicar Separador</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteTabs()">Separador Ofline </button>
+                        </div>
+
                     </div>
                 </form>
             </div>
         </div>
     </div>
-   
-     <script src="js/facebook.js"></script>
+
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -60,6 +91,8 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous">
     </script>
+
+    <script src="js/facebook.js"></script>
 
 
 </body>
